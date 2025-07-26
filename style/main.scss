@@ -1,0 +1,136 @@
+$field-width: 290px; // 游戏区域宽度
+$grid-spacing: 10px; // 格子间距
+$grid-row-cells: 4; // 行数
+$tile-size: ($field-width - $grid-spacing * ($grid-row-cells + 1))/$grid-row-cells; // 格子大小
+$tile-border-radius: 3px; // 格子圆角
+
+// 游戏区域
+main {
+  margin-top: 20px; // 上边距
+  margin-left: auto; // 左边距
+  margin-right: auto; // 右边距
+  box-sizing: border-box; // 盒子模型
+  width: $field-width; // 宽度
+  height: $field-width; // 高度
+  position: relative; // 相对定位
+  padding: $grid-spacing; // 内边距
+  background: #bbada0; // 背景色
+  border-radius: 8px; // 圆角
+
+  // 游戏区域网格
+  .game-grid {
+    .grid-row {
+      margin-bottom: $grid-spacing; // 下边距
+      display: flex; // 弹性布局
+
+      .grid-cell {
+        width: $tile-size; // 宽度
+        height: $tile-size; // 高度
+        margin-right: $grid-spacing; // 右边距
+        float: left; // 浮动
+        border-radius: 3px; // 圆角
+        background: rgba(238, 228, 218, 0.35); // 背景色
+
+        &:last-child { // 最后一个子元素
+          margin-right: 0;
+        }
+      }
+
+      &:last-child { // 最后一个子元素
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // 格子容器
+  .tile-container {
+    position: absolute; // 绝对定位   
+    left: 0; // 左边距
+    top: 0; // 上边距
+
+    // 格子
+    .tile {
+      position: absolute; // 绝对定位
+      width: $tile-size; // 宽度
+      height: $tile-size; // 高度
+      border-radius: 4px; // 圆角
+      transition: transform 100ms ease-in-out; // 过渡效果
+    }
+
+    // 格子内容
+    .tile-inner {
+      width: 100%; // 宽度
+      height: 100%; // 高度
+      line-height: $tile-size; // 行高
+      background: #eee4da; // 背景色
+      text-align: center; // 文本居中
+      font-weight: bold; // 粗体
+      font-size: 34px; // 字体大小
+      color: #776e65; // 字体颜色
+    }
+
+    // 格子位置
+    @for $x from 1 through $grid-row-cells {
+      @for $y from 1 through $grid-row-cells {
+        .tile-position-#{$x}-#{$y} {
+          $xPos: $grid-spacing + floor(($tile-size + $grid-spacing) * ($y - 1)); // 计算x坐标
+          $yPos: $grid-spacing + floor(($tile-size + $grid-spacing) * ($x - 1)); // 计算y坐标
+          transform: translate($xPos, $yPos); // 移动
+        }
+      }
+    }
+
+    // 格子内容
+    .tile.tile-2 .tile-inner {
+      background: #eee4da; // 背景色
+    }
+    .tile.tile-4 .tile-inner {
+      background: #ede0c8; // 背景色
+    }
+    .tile.tile-8 .tile-inner {
+      color: #f9f6f2; // 字体颜色
+      background: #f2b179; // 背景色
+    }
+    .tile.tile-16 .tile-inner {
+      color: #f9f6f2; // 字体颜色
+      background: #f59563; // 背景色
+    }
+    .tile.tile-32 .tile-inner {
+      color: #f9f6f2; // 字体颜色
+      background: #f67c5f; // 背景色
+    }
+    .tile.tile-64 .tile-inner {
+      color: #f9f6f2; // 字体颜色
+      background: #f65e3b; // 背景色
+    }
+    .tile.tile-128 .tile-inner {
+      color: #f9f6f2; // 字体颜色
+      background: #edcf72; // 背景色
+      font-size: 30px; // 字体大小
+    }
+
+    .tile.tile-256 .tile-inner {
+      color: #f9f6f2; // 字体颜色
+      background: #edcc61; // 背景色
+      font-size: 30px; // 字体大小
+    }
+
+    .tile.tile-512 .tile-inner {
+      color: #f9f6f2; // 字体颜色
+      background: #edc850; // 背景色
+      font-size: 30px; // 字体大小
+    }
+
+    .tile.tile-1024 .tile-inner {
+      color: #f9f6f2; // 字体颜色
+      background: #edc53f; // 背景色
+      font-size: 22px; // 字体大小
+    }
+
+    .tile.tile-2048 .tile-inner {
+      color: #f9f6f2; // 字体颜色
+      background: #edc22e; // 背景色
+      font-size: 22px; // 字体大小
+    }
+  }
+}

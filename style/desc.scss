@@ -1,0 +1,27 @@
+.desc {
+  // 描述
+  display: flex; // 弹性布局
+  padding: 0 42px; // 内边距
+  align-items: center; // 垂直居中
+
+  p {
+    font-size: 15px; // 字体大小
+    color: #635545; // 字体颜色
+    flex: 1; // 弹性布局
+  }
+
+  button {
+    margin: 0; // 外边距
+    padding: 0; // 内边距
+    width: 98px; // 宽度
+    height: 44px; // 高度
+    border-radius: 4px; // 圆角
+    background-color: #8f7a66; // 背景色
+    font-size: 14px; // 字体大小
+    color: #fff; // 字体颜色
+    line-height: 44px; // 行高
+    text-align: center; // 文本居中
+    font-weight: 700; // 字体粗细
+    font-family: Arial-Black; // 字体
+  }
+}
