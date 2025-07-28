@@ -5,11 +5,8 @@
     <title>优课达-2048</title>
     <link rel="stylesheet" href="./style/index.css" />
   </head>
-
-  <!-- 主体内容-->
   <body>
     <div class="container">
-      
       <nav>
         <h1>2048</h1>
         <div class="score">
@@ -23,7 +20,6 @@
           </div>
         </div>
       </nav>
-
       <div class="desc">
         <p>
           <strong>Play 2048 Game online</strong>Join the numbers and get to the
@@ -31,16 +27,14 @@
         </p>
         <button>New Game</button>
       </div>
-
       <main>
-        <div class="game-grid"><!--游戏网格-->
-          <div class="grid-row"><!--网格一行四个元素-->
+        <div class="game-grid">
+          <div class="grid-row">
             <div class="grid-cell"></div>
             <div class="grid-cell"></div>
             <div class="grid-cell"></div>
             <div class="grid-cell"></div>
           </div>
-
           <div class="grid-row">
             <div class="grid-cell"></div>
             <div class="grid-cell"></div>
@@ -61,7 +55,7 @@
           </div>
         </div>
         <div class="tile-container">
-          <div class="tile tile-2 tile-position-1-1">
+          <!-- <div class="tile tile-2 tile-position-1-1">
             <div class="tile-inner">2</div>
           </div>
           <div class="tile tile-4 tile-position-1-2">
@@ -93,20 +87,28 @@
           </div>
           <div class="tile tile-2048 tile-position-3-3">
             <div class="tile-inner">2048</div>
-          </div>
+          </div> -->
         </div>
       </main>
-
       <footer>
-        <img src="./images/logo.png" />
-        <span>出品</span>
+        <div class="challenge-text">
+          <strong>祁文学长出品</strong><br/>
+          <div>挑战2048，奖励星巴克！</div><br/>
+          <span>有效期：2025年7月28日至2025年9月7日</span>
+        </div>
       </footer>
-
-      <div class="mask status">
+           <div class="mask status">
         <div class="content">Game Over!</div>
         <button>Try again</button>
       </div>
-
+      </footer>
     </div>
+    <script src="./scripts/tile.js"></script>
+    <script src="./scripts/grid.js"></script>
+    <script src="./scripts/render.js"></script>
+    <script src="./scripts/listener.js"></script>
+    <script src="./scripts/storage.js"></script>
+    <script src="./scripts/manager.js"></script>
+    <script src="./scripts/index.js"></script>
   </body>
 </html>

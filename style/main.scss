@@ -1,136 +1,184 @@
-$field-width: 290px; // 游戏区域宽度
-$grid-spacing: 10px; // 格子间距
-$grid-row-cells: 4; // 行数
-$tile-size: ($field-width - $grid-spacing * ($grid-row-cells + 1))/$grid-row-cells; // 格子大小
-$tile-border-radius: 3px; // 格子圆角
+$field-width: 290px;
+$grid-spacing: 10px;
+$grid-row-cells: 4;
+$tile-size: ($field-width - $grid-spacing * ($grid-row-cells + 1)) /
+  $grid-row-cells;
+$tile-border-radius: 3px;
 
-// 游戏区域
 main {
-  margin-top: 20px; // 上边距
-  margin-left: auto; // 左边距
-  margin-right: auto; // 右边距
-  box-sizing: border-box; // 盒子模型
-  width: $field-width; // 宽度
-  height: $field-width; // 高度
-  position: relative; // 相对定位
-  padding: $grid-spacing; // 内边距
-  background: #bbada0; // 背景色
-  border-radius: 8px; // 圆角
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  width: $field-width;
+  height: $field-width;
+  position: relative;
+  padding: $grid-spacing;
+  background: #ffffff; // 将棕色背景改为白色
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); // 添加容器阴影
 
-  // 游戏区域网格
   .game-grid {
     .grid-row {
-      margin-bottom: $grid-spacing; // 下边距
-      display: flex; // 弹性布局
+      margin-bottom: $grid-spacing;
+      display: flex;
 
       .grid-cell {
-        width: $tile-size; // 宽度
-        height: $tile-size; // 高度
-        margin-right: $grid-spacing; // 右边距
-        float: left; // 浮动
-        border-radius: 3px; // 圆角
-        background: rgba(238, 228, 218, 0.35); // 背景色
+        width: $tile-size;
+        height: $tile-size;
+        margin-right: $grid-spacing;
+        float: left;
+        border-radius: 3px;
+        background: rgba(238, 228, 218, 0.5); // 调整空白单元格颜色
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); // 添加单元格内阴影
 
-        &:last-child { // 最后一个子元素
+        &:last-child {
           margin-right: 0;
         }
       }
 
-      &:last-child { // 最后一个子元素
+      &:last-child {
         margin-bottom: 0;
       }
     }
   }
 
-  // 格子容器
   .tile-container {
-    position: absolute; // 绝对定位   
-    left: 0; // 左边距
-    top: 0; // 上边距
+    position: absolute;
+    left: 0;
+    top: 0;
 
-    // 格子
     .tile {
-      position: absolute; // 绝对定位
-      width: $tile-size; // 宽度
-      height: $tile-size; // 高度
-      border-radius: 4px; // 圆角
-      transition: transform 100ms ease-in-out; // 过渡效果
+      position: absolute;
+      width: $tile-size;
+      height: $tile-size;
+      border-radius: 4px;
+      transition: transform 150ms cubic-bezier(0.39, 1.57, 0.58, 1); // 更流畅的缓动函数
     }
 
-    // 格子内容
     .tile-inner {
-      width: 100%; // 宽度
-      height: 100%; // 高度
-      line-height: $tile-size; // 行高
-      background: #eee4da; // 背景色
-      text-align: center; // 文本居中
-      font-weight: bold; // 粗体
-      font-size: 34px; // 字体大小
-      color: #776e65; // 字体颜色
+      width: 100%;
+      height: 100%;
+      line-height: $tile-size;
+      background: #eee4da;
+      text-align: center;
+      font-weight: bold;
+      font-size: 34px;
+      color: #776e65;
     }
 
-    // 格子位置
     @for $x from 1 through $grid-row-cells {
       @for $y from 1 through $grid-row-cells {
         .tile-position-#{$x}-#{$y} {
-          $xPos: $grid-spacing + floor(($tile-size + $grid-spacing) * ($y - 1)); // 计算x坐标
-          $yPos: $grid-spacing + floor(($tile-size + $grid-spacing) * ($x - 1)); // 计算y坐标
-          transform: translate($xPos, $yPos); // 移动
+          $xPos: $grid-spacing + floor(($tile-size + $grid-spacing) * ($y - 1));
+          $yPos: $grid-spacing + floor(($tile-size + $grid-spacing) * ($x - 1));
+          transform: translate($xPos, $yPos);
         }
       }
     }
 
-    // 格子内容
+    .tile-merged .tile-inner {
+      z-index: 20;
+      animation: pop 200ms ease 100ms;
+      animation-fill-mode: backwards;
+    }
+
+    .tile-new .tile-inner {
+      animation: appear 200ms ease-in-out;
+      animation-delay: 100ms;
+      animation-fill-mode: backwards;
+    }
+
     .tile.tile-2 .tile-inner {
-      background: #eee4da; // 背景色
+      background: #fff7e6; // 浅色背景
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); // 添加方块阴影
     }
     .tile.tile-4 .tile-inner {
-      background: #ede0c8; // 背景色
+      background: #fff0cc; // 稍深浅色
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
     }
     .tile.tile-8 .tile-inner {
-      color: #f9f6f2; // 字体颜色
-      background: #f2b179; // 背景色
+      color: #ffffff; // 白色文字
+      background: #ff9f40; // 橙色作为点缀
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
     }
     .tile.tile-16 .tile-inner {
-      color: #f9f6f2; // 字体颜色
-      background: #f59563; // 背景色
+      color: #ffffff;
+      background: #fd7e14; // 深橙色
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.18);
     }
     .tile.tile-32 .tile-inner {
-      color: #f9f6f2; // 字体颜色
-      background: #f67c5f; // 背景色
+      color: #f9f6f2;
+      background: #f67c5f;
     }
     .tile.tile-64 .tile-inner {
-      color: #f9f6f2; // 字体颜色
-      background: #f65e3b; // 背景色
+      color: #f9f6f2;
+      background: #f65e3b;
     }
     .tile.tile-128 .tile-inner {
-      color: #f9f6f2; // 字体颜色
-      background: #edcf72; // 背景色
-      font-size: 30px; // 字体大小
+      color: #f9f6f2;
+      background: #edcf72;
+      font-size: 30px;
     }
 
     .tile.tile-256 .tile-inner {
-      color: #f9f6f2; // 字体颜色
-      background: #edcc61; // 背景色
-      font-size: 30px; // 字体大小
+      color: #f9f6f2;
+      background: #edcc61;
+      font-size: 30px;
     }
 
     .tile.tile-512 .tile-inner {
-      color: #f9f6f2; // 字体颜色
-      background: #edc850; // 背景色
-      font-size: 30px; // 字体大小
+      color: #f9f6f2;
+      background: #edc850;
+      font-size: 30px;
     }
 
     .tile.tile-1024 .tile-inner {
-      color: #f9f6f2; // 字体颜色
-      background: #edc53f; // 背景色
-      font-size: 22px; // 字体大小
+      color: #f9f6f2;
+      background: #edc53f;
+      font-size: 22px;
+      animation: glow 2s infinite ease-in-out; // 应用发光动画
     }
 
     .tile.tile-2048 .tile-inner {
-      color: #f9f6f2; // 字体颜色
-      background: #edc22e; // 背景色
-      font-size: 22px; // 字体大小
+      color: #f9f6f2;
+      background: #edc22e;
+      font-size: 22px;
+      animation: glow 1.5s infinite ease-in-out; // 更快的发光频率
     }
   }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pop {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+// 添加高分值方块发光效果
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 15px rgba(237, 194, 46, 0.5); }
+  50% { box-shadow: 0 0 25px rgba(237, 194, 46, 0.8); }
+}
+
+// 添加分数增长动画
+.score-increase {
+  animation: scorePopup 0.5s ease-out;
+}
+
+@keyframes scorePopup {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.5); color: #ff5e3b; }
+  100% { transform: scale(1); }
 }

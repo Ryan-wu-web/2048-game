@@ -26,17 +26,27 @@ button {
   width: 375px;
   height: 667px;
   position: fixed;
-  background-color: #faf8ef;
+  background-color: #ffffff; // 将浅灰色改为纯白色
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); // 添加整体容器阴影
 }
 
 footer {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  margin-top: 78px;
+  margin-top: 30px;
+
+  .challenge-text {
+    text-align: center;
+    width: 100%;
+  }
+
+  strong{
+    box-sizing: border-box;
+  }
 
   img {
     width: 100px;
@@ -57,7 +67,7 @@ footer {
   right: 0;
   top: 0;
   bottom: 0;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -74,7 +84,7 @@ footer {
     margin-top: 20px;
     width: 98px;
     height: 44px;
-    background: #8f7a67;
+    background: #ff9f40; // 橙色按钮
     border-radius: 4px;
     font-size: 14px;
     color: #ffffff;
@@ -82,5 +92,17 @@ footer {
     font-family: Arial-Black;
     font-weight: 700;
     line-height: 44px;
+    transition: all 0.2s ease; // 添加过渡效果
+    box-shadow: 0 4px 8px rgba(253, 126, 20, 0.3);
+  }
+
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(253, 126, 20, 0.4);
+  }
+
+  button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(253, 126, 20, 0.3);
   }
 }
